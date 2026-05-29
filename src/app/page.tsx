@@ -1,5 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
@@ -7,7 +10,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   ArrowRight,
   BookOpen,
@@ -17,38 +20,14 @@ import {
   LayoutDashboard,
   LogIn,
   Users,
-} from "lucide-react";
+  Beaker,
+} from 'lucide-react';
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-indigo-50">
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <Code className="h-6 w-6 text-indigo-600" />
-            <span className="text-xl font-bold text-indigo-600">
-              Coding Learning
-            </span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <a href="#tentang" className="text-sm font-medium hover:text-indigo-600">
-              Tentang
-            </a>
-            <a href="#platform" className="text-sm font-medium hover:text-indigo-600">
-              Platform
-            </a>
-            <a href="#kurikulum" className="text-sm font-medium hover:text-indigo-600">
-              Kurikulum
-            </a>
-          </nav>
-          <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-            <LogIn className="mr-2 h-4 w-4" />
-            Masuk Guru
-          </Button>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-20 pb-16 text-center">
         <Badge className="mb-4 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 text-sm px-4 py-1">
@@ -64,7 +43,11 @@ export default function Home() {
           dan metodologi pembelajaran terbaik.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-lg px-8 py-6">
+          <Button
+            size="lg"
+            className="bg-indigo-600 hover:bg-indigo-700 text-lg px-8 py-6"
+            onClick={() => router.push('/dashboard')}
+          >
             <GraduationCap className="mr-2 h-5 w-5" />
             Mulai Mengajar
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -73,6 +56,7 @@ export default function Home() {
             size="lg"
             variant="outline"
             className="text-lg px-8 py-6 border-indigo-200 hover:bg-indigo-50"
+            onClick={() => router.push('/kurikulum')}
           >
             <BookOpen className="mr-2 h-5 w-5" />
             Lihat Kurikulum
@@ -86,7 +70,10 @@ export default function Home() {
           Satu Dashboard untuk Semua Kebutuhan Mengajar
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <Card className="border-indigo-100 hover:shadow-lg transition-shadow">
+          <Card
+            className="border-indigo-100 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => router.push('/dashboard')}
+          >
             <CardHeader>
               <LayoutDashboard className="h-10 w-10 text-indigo-600 mb-2" />
               <CardTitle>Dashboard Guru</CardTitle>
@@ -95,8 +82,16 @@ export default function Home() {
                 untuk ditampilkan di SMART Board.
               </CardDescription>
             </CardHeader>
+            <CardFooter>
+              <Button variant="outline" className="w-full h-12 text-base">
+                Buka Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardFooter>
           </Card>
-          <Card className="border-indigo-100 hover:shadow-lg transition-shadow">
+          <Card
+            className="border-indigo-100 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => router.push('/platform')}
+          >
             <CardHeader>
               <Laptop className="h-10 w-10 text-indigo-600 mb-2" />
               <CardTitle>12 Platform Coding</CardTitle>
@@ -105,16 +100,29 @@ export default function Home() {
                 dan tips mengajar khusus guru.
               </CardDescription>
             </CardHeader>
+            <CardFooter>
+              <Button variant="outline" className="w-full h-12 text-base">
+                Lihat Platform <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardFooter>
           </Card>
-          <Card className="border-indigo-100 hover:shadow-lg transition-shadow">
+          <Card
+            className="border-indigo-100 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => router.push('/metodologi')}
+          >
             <CardHeader>
-              <BookOpen className="h-10 w-10 text-indigo-600 mb-2" />
+              <Beaker className="h-10 w-10 text-indigo-600 mb-2" />
               <CardTitle>6 Metodologi</CardTitle>
               <CardDescription>
                 Game-Based Learning, Project-Based, Collaborative, dan lainnya
                 dalam format aksi langsung di kelas.
               </CardDescription>
             </CardHeader>
+            <CardFooter>
+              <Button variant="outline" className="w-full h-12 text-base">
+                Pelajari Metodologi <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardFooter>
           </Card>
         </div>
       </section>
@@ -125,7 +133,10 @@ export default function Home() {
           Pilih Jenjang Kelas
         </h2>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200 hover:shadow-xl transition-all cursor-pointer">
+          <Card
+            className="bg-gradient-to-br from-green-50 to-green-100 border-green-200 hover:shadow-xl transition-all cursor-pointer"
+            onClick={() => router.push('/teach/sd')}
+          >
             <CardHeader className="items-center text-center">
               <Users className="h-16 w-16 text-green-600 mb-2" />
               <CardTitle className="text-2xl">SD</CardTitle>
@@ -137,10 +148,15 @@ export default function Home() {
               <p>Scratch, Lightbot, Kodable, Blockly</p>
             </CardContent>
             <CardFooter className="justify-center">
-              <Badge className="bg-green-500 text-white">Mulai</Badge>
+              <Button className="bg-green-600 hover:bg-green-700 text-white h-14 text-base px-8">
+                Mulai Mengajar SD <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </CardFooter>
           </Card>
-          <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200 hover:shadow-xl transition-all cursor-pointer">
+          <Card
+            className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200 hover:shadow-xl transition-all cursor-pointer"
+            onClick={() => router.push('/teach/smp')}
+          >
             <CardHeader className="items-center text-center">
               <Users className="h-16 w-16 text-yellow-600 mb-2" />
               <CardTitle className="text-2xl">SMP</CardTitle>
@@ -152,10 +168,15 @@ export default function Home() {
               <p>Scratch, CodeCombat, App Inventor, Tynker</p>
             </CardContent>
             <CardFooter className="justify-center">
-              <Badge className="bg-yellow-500 text-white">Mulai</Badge>
+              <Button className="bg-yellow-600 hover:bg-yellow-700 text-white h-14 text-base px-8">
+                Mulai Mengajar SMP <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </CardFooter>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 hover:shadow-xl transition-all cursor-pointer">
+          <Card
+            className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 hover:shadow-xl transition-all cursor-pointer"
+            onClick={() => router.push('/teach/sma')}
+          >
             <CardHeader className="items-center text-center">
               <Users className="h-16 w-16 text-orange-600 mb-2" />
               <CardTitle className="text-2xl">SMA</CardTitle>
@@ -167,13 +188,42 @@ export default function Home() {
               <p>Python, mBlock, Khan Academy, CodeCombat</p>
             </CardContent>
             <CardFooter className="justify-center">
-              <Badge className="bg-orange-500 text-white">Mulai</Badge>
+              <Button className="bg-orange-600 hover:bg-orange-700 text-white h-14 text-base px-8">
+                Mulai Mengajar SMA <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </CardFooter>
           </Card>
         </div>
       </section>
 
-      {/* CTA Footer */}
+      {/* CTA Section */}
+      <section className="container mx-auto px-4 py-16 text-center">
+        <h2 className="text-3xl font-bold mb-6">Siap Mengajar Coding?</h2>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+          Masuk ke dashboard guru untuk mulai memilih materi dan mengajar di SMART Board.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button
+            size="lg"
+            className="bg-indigo-600 hover:bg-indigo-700 text-lg px-8 py-6"
+            onClick={() => router.push('/login')}
+          >
+            <LogIn className="mr-2 h-5 w-5" />
+            Masuk Guru
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="text-lg px-8 py-6 border-indigo-200 hover:bg-indigo-50"
+            onClick={() => router.push('/dashboard')}
+          >
+            <LayoutDashboard className="mr-2 h-5 w-5" />
+            Coba Dashboard
+          </Button>
+        </div>
+      </section>
+
+      {/* Footer */}
       <footer className="bg-indigo-900 text-white py-12 mt-16">
         <div className="container mx-auto px-4 text-center">
           <Code className="h-10 w-10 mx-auto mb-4 opacity-75" />
