@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -17,13 +16,7 @@ import {
   Laptop,
   LayoutDashboard,
   LogIn,
-  Menu,
   Users,
-  Smartphone,
-  Brain,
-  Gamepad2,
-  Globe,
-  Sparkles,
 } from "lucide-react";
 
 export default function Home() {
